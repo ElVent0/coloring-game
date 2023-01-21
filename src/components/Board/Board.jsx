@@ -109,7 +109,7 @@ const Board = () => {
   const [userColor, setUserColor] = useState(null);
 
   useEffect(() => {
-    const handleData = async () => {
+    const handleColor = async () => {
       try {
         if (localStorage.getItem("randomUserColorForGame")) {
           setUserColor(localStorage.getItem("randomUserColorForGame"));
@@ -125,15 +125,67 @@ const Board = () => {
         console.log(e);
       }
     };
+    const handleData = async () => {
+      try {
+        fetch("http://localhost:3000/api/table/")
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.data.result);
+            setData(data.data.result);
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    };
     handleData();
+    handleColor();
   }, []);
+
+  //   const sendData = () => {
+  //     fetch("http://localhost:3000/api/table/", {
+  //       method: "PUT",
+  //       body: JSON.stringify({
+  //         id: item.id,
+  //         color: userColor,
+  //       }),
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //     })
+  //       .then((response) => {
+  //         return response.json();
+  //       })
+  //       .then((data) => {
+  //         console.log(data.data.result);
+  //       });
+  //   };
 
   const handleClick = (id, color) => {
     const objWithIdIndex = data.findIndex((item) => item.id === id);
     const newData = [...data];
     newData.splice(objWithIdIndex, 1, { id, color });
     setData(newData);
-    console.log(data, userColor);
+
+    // sendData(newData);
+
+    // fetch("http://localhost:3000/api/table/", {
+    //   method: "PUT",
+    //   body: JSON.stringify({
+    //     id: id,
+    //     color: color,
+    //   }),
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data.data.result);
+    //   });
   };
 
   return (

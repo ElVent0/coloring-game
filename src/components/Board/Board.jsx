@@ -1,13 +1,17 @@
 import { BoardStyled, List, Item, Button } from "./Board.styled";
 import { useState, useEffect } from "react";
 
+const { REACT_APP_API_URL } = process.env;
+
 const Board = () => {
   const [data, setData] = useState(null);
   const [userColor, setUserColor] = useState(null);
 
+  console.log(REACT_APP_API_URL);
+
   const handleData = async () => {
     try {
-      fetch("http://localhost:3000/api/table/")
+      fetch(`${REACT_APP_API_URL}/api/table/`)
         .then((response) => {
           return response.json();
         })
@@ -43,7 +47,7 @@ const Board = () => {
   }, []);
 
   const handleClick = (id, color) => {
-    fetch(`http://localhost:3000/api/table/${id}`, {
+    fetch(`${REACT_APP_API_URL}/api/table/${id}`, {
       method: "PUT",
       body: JSON.stringify({
         color: color,

@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
-export const BoardStyled = styled.div``;
-
-export const List = styled.ul`
+export const BoardStyled = styled.div`
   height: 60vh;
   width: 60vh;
+`;
+
+export const List = styled.ul`
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 2.2%;

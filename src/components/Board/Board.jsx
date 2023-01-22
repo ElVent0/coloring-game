@@ -1,4 +1,5 @@
 import { BoardStyled, List, Item, Button } from "./Board.styled";
+import Loader from "../Loader/Loader";
 import { useState, useEffect } from "react";
 
 const { REACT_APP_API_URL } = process.env;
@@ -64,7 +65,7 @@ const Board = () => {
 
   return (
     <>
-      {data !== null && (
+      {data !== null ? (
         <BoardStyled>
           <List>
             {data.map((item) => {
@@ -79,6 +80,8 @@ const Board = () => {
             })}
           </List>
         </BoardStyled>
+      ) : (
+        <Loader />
       )}
     </>
   );

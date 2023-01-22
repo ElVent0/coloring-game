@@ -1,6 +1,5 @@
 import { BoardStyled, List, Item, Button } from "./Board.styled";
 import { useState, useEffect } from "react";
-// import startData from "../../data/table-game.json";
 
 const Board = () => {
   const [data, setData] = useState(null);

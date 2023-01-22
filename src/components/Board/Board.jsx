@@ -46,7 +46,6 @@ const Board = () => {
     fetch(`http://localhost:3000/api/table/${id}`, {
       method: "PUT",
       body: JSON.stringify({
-        id: id,
         color: color,
       }),
       headers: {

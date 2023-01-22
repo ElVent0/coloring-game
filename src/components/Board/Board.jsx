@@ -7,8 +7,6 @@ const Board = () => {
   const [data, setData] = useState(null);
   const [userColor, setUserColor] = useState(null);
 
-  console.log(REACT_APP_API_URL);
-
   const handleData = async () => {
     try {
       fetch(`${REACT_APP_API_URL}/api/table/`)

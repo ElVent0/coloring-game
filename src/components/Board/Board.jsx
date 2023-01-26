@@ -15,7 +15,7 @@ const Board = () => {
           return response.json();
         })
         .then((result) => {
-          console.log(result.result);
+          // console.log("Start data", result.result);
           setData(result.result);
         });
     } catch (e) {
@@ -43,7 +43,16 @@ const Board = () => {
   useEffect(() => {
     handleData();
     handleColor();
-  }, []);
+    const ws = new WebSocket("ws://localhost:5000");
+    ws.onopen = () => {
+      // console.log("Connected frontend");
+    };
+    ws.onmessage = (e) => {
+      if (data !== JSON.parse(e.data)) {
+        setData(JSON.parse(e.data));
+      }
+    };
+  }, [data]);
 
   const handleClick = (id, color) => {
     fetch(`${REACT_APP_API_URL}/api/table/${id}`, {
@@ -56,10 +65,10 @@ const Board = () => {
       },
     })
       .then((response) => {
-        return response.json();
+        // return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log("Data after click", data);
       });
   };
 
